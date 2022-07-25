@@ -69,8 +69,12 @@ from urwid.text_layout import (TextLayout, StandardTextLayout, default_layout,
 from urwid.display_common import (UPDATE_PALETTE_ENTRY, DEFAULT, BLACK,
     DARK_RED, DARK_GREEN, BROWN, DARK_BLUE, DARK_MAGENTA, DARK_CYAN,
     LIGHT_GRAY, DARK_GRAY, LIGHT_RED, LIGHT_GREEN, YELLOW, LIGHT_BLUE,
-    LIGHT_MAGENTA, LIGHT_CYAN, WHITE, AttrSpecError, AttrSpec, RealTerminal,
+    LIGHT_MAGENTA, LIGHT_CYAN, WHITE, AttrSpecError, AttrSpec,
     ScreenError, BaseScreen)
+try:
+    from urwid.display_unix_common import RealTerminal
+except ImportError:
+    pass # windows
 from urwid.util import (calc_text_pos, calc_width, is_wide_char,
     move_next_char, move_prev_char, within_double_byte, detected_encoding,
     set_encoding, get_encoding_mode, apply_target_encoding, supports_unicode,
@@ -78,7 +82,15 @@ from urwid.util import (calc_text_pos, calc_width, is_wide_char,
     int_scale, is_mouse_event)
 from urwid.treetools import (TreeWidgetError, TreeWidget, TreeNode,
     ParentNode, TreeWalker, TreeListBox)
-from urwid.vterm import (TermModes, TermCharset, TermScroller, TermCanvas,
-    Terminal)
+try:
+    from urwid.vterm import (TermModes, TermCharset, TermScroller, TermCanvas,
+        Terminal)
+except ImportError:
+    pass # windows
 
-from urwid import raw_display
+try:
+    from urwid import raw_display
+except ImportError:
+    pass # windows
+
+

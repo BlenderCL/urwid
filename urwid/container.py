@@ -1402,6 +1402,11 @@ class Pile(Widget, WidgetContainerMixin, WidgetContainerListContentsMixin):
             raise PileError('invalid height_type: %r' % (height_type,))
         return (height_type, height_amount)
 
+    # def selectable(self):
+    #     """Return True if the focus item is selectable."""
+    #     w = self.focus
+    #     return w is not None and w.selectable()
+
     def set_focus(self, item):
         """
         Set the item in focus, for backwards compatibility.
@@ -1809,6 +1814,8 @@ class Columns(Widget, WidgetContainerMixin, WidgetContainerListContentsMixin):
 
         if self.contents and focus_column is not None:
             self.focus_position = focus_column
+        # if focus_column is None:
+        #     focus_column = 0
         self.pref_col = None
         self.min_width = min_width
         self._cache_maxcol = None
@@ -2330,6 +2337,10 @@ class Columns(Widget, WidgetContainerMixin, WidgetContainerListContentsMixin):
             self.focus_position = j
             return
         return key
+    # def selectable(self):
+    #     """Return the selectable value of the focus column."""
+    #     w = self.focus
+    #     return w is not None and w.selectable()
 
 
 
