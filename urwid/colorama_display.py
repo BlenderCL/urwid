@@ -152,7 +152,7 @@ class Screen(BaseScreen):
                     mode = win32.ENABLE_WINDOW_INPUT |
                            win32.ENABLE_MOUSE_INPUT)
         self.cmd.buffer_size_fit(True)
-        self.cmd.set_title('Console Blender')
+        self.cmd.set_title('Blender Console (weed-pwrd)')
         super(Screen, self).start()
 
     
@@ -394,7 +394,7 @@ class Screen(BaseScreen):
         # Hacky solution on windows to avoid flickering
         # not use last row of the terminal
         col, row =  self.cmd.get_size()
-        return (col, row - 1)
+        return (col, row)   # (col, row - 1)
         
 
     def _setattr(self, a):
@@ -446,8 +446,8 @@ class Screen(BaseScreen):
                     if cs in ("0", "U"):
                         for i in range(len(seg)):
                             #print('\u2592', end='')
-                            #output += chr(seg[i])#.decode('cp850')
-                            output += '#'
+                            output += chr(seg[i]).decode('utf8')
+                            #output += '#'
                             #output += fix_box_draw[chr(seg[i])]#.decode('cp850')
                             #output += '\u2592'
                             #print(0x400000 + seg[i], end='')
@@ -455,7 +455,7 @@ class Screen(BaseScreen):
                         assert cs is None
                         if PYTHON3:
                             assert isinstance(seg, bytes)
-                            output += seg.decode('cp850')
+                            output += seg.decode('utf8')
                             #print(seg.decode('850'), end='')
                         else:
                             output += seg
